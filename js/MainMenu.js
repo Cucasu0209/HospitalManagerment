@@ -90,12 +90,9 @@ export default class MainMenu extends Phaser.GameObjects.Container {
             y: this.y + 100,
             width: 150,
             height: 30,
-            text: "People Setting",
+            text: "Save Data",
             onClick: () => {
-                this.scene.mainGamePlayScene.setCurrentComponentEditting(null);
-                this.editMenu.hideAllEditMenu();
-                this.editMenu.setPeopleEditorActive(true);
-                // this.scene.mainGamePlayScene.createNewPeople();
+                this.scene.mainGamePlayScene.saveData();
             }
         });
         this.loadBtn = new ButtonBase({
@@ -106,7 +103,7 @@ export default class MainMenu extends Phaser.GameObjects.Container {
             height: 30,
             text: "Load Data",
             onClick: () => {
-
+                this.scene.mainGamePlayScene.loadData();
             }
         });
         this.backBtn = new ButtonBase({

@@ -16,6 +16,7 @@ export default class AVG extends ItemEdittable {
         this.isCreatingPath = false;
         this.path = [];
 
+
         this.scene.componentWantUpdate.push(this);
 
         this.isDrawingPath = false;
@@ -117,19 +118,15 @@ export default class AVG extends ItemEdittable {
         }
 
 
-        if (this.isSelfControl && this.scene.mainGamePlayScene.isPlayingMainGame) {
+        if (this.scene.mainGamePlayScene.isPlayingMainGame) {
             if (time > this.lastMoveTime + 1000 / this.speed) {
-                let oldX = this.x;
-                let oldY = this.y;
-                this.x += this.direction.x * this.scene.baseSquareSize.x;
-                this.y += this.direction.y * this.scene.baseSquareSize.y;
-                if (!this.checkNewPosition()) {
-                    this.x = oldX;
-                    this.y = oldY;
+                if (this.isSelfControl) {
+                    this.controlMove();
+                } else {
+                    this.movePath();
                 }
                 this.lastMoveTime = time;
             }
-
 
         }
     }
@@ -251,7 +248,57 @@ export default class AVG extends ItemEdittable {
             this.unlockPosition();
     }
 
+    movePath() {
+        //
+        if (this.path.length == 0) return;
+        // console.log(this.path[0].x + "   " + this.path[0].y);
+        let oldX = this.x;
+        let oldY = this.y;
+        this.x += this.path[0].x - this.path[0].width / 2;
+        this.y += this.path[0].y - this.path[0].height / 2;
+        console.log(this.x + "   " + this.y);
+        if (!this.checkNewPosition()) {
+            this.x = oldX;
+            this.y = oldY;
+        } else {
+            this.rechangePathOrigin(oldX - this.x, oldY - this.y);
+            this.path.shift();
+        }
+    }
 
+    rechangePathOrigin(addX, addY) {
+        for (let index = 0; index < this.path.length; index++) {
+            this.path[index].x += addX;
+            this.path[index].y += addY;
 
+        }
+    }
 
+    controlMove() {
+        let oldX = this.x;
+        let oldY = this.y;
+        this.x += this.direction.x * this.scene.baseSquareSize.x;
+        this.y += this.direction.y * this.scene.baseSquareSize.y;
+        if (!this.checkNewPosition()) {
+            this.x = oldX;
+            this.y = oldY;
+        }
+    }
+    getMeObject() {
+        return {
+            name: this.name,
+            worldX: this.getWorldX(),
+            worldY: this.getWorldY(),
+            worldWidth: this.worldWidth,
+            worldHeight: this.worldHeight,
+            color: this.color,
+            depth: this.depth,
+            worldLimit: {
+                x1: this.worldLimit.x1,
+                y1: this.worldLimit.y1,
+                x2: this.worldLimit.x2,
+                y2: this.worldLimit.y2
+            }
+        }
+    }
 }

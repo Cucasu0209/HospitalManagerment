@@ -56,6 +56,7 @@ export default class MainGamePlayScene extends Phaser.GameObjects.Container {
                 { worldX: 9, worldY: 1 }
             ]
         });
+
         this.componentList.push(room);
     }
 
@@ -168,6 +169,141 @@ export default class MainGamePlayScene extends Phaser.GameObjects.Container {
         this.componentList.push(people);
     }
 
+
+    createNewRoomWithInfo(info) {
+        let room = new Room({
+            scene: this.scene,
+            name: info.name,
+            worldX: info.worldX,
+            worldY: info.worldY,
+            worldWidth: info.worldWidth,
+            worldHeight: info.worldHeight,
+            color: info.color,
+            depth: info.depth,
+            ondragend: (pointer, gameObject) => {
+
+            },
+            worldLimit: {
+                x1: info.worldLimit.x1,
+                y1: info.worldLimit.y1,
+                x2: info.worldLimit.x2,
+                y2: info.worldLimit.y2
+            }
+        });
+        room.addRoomDoors(info.numberOfDoor);
+        room.addPeopleInRoom(info.numberOfPeople)
+        this.componentList.push(room);
+    }
+
+
+    createNewAVGWithInfo(info) {
+        let avg = new AVG({
+            scene: this.scene,
+            name: info.name,
+            worldX: info.worldX,
+            worldY: info.worldY,
+            worldWidth: info.worldWidth,
+            worldHeight: info.worldHeight,
+            color: info.color,
+            depth: info.depth,
+            ondragend: (pointer, gameObject) => {
+
+            },
+            worldLimit: {
+                x1: info.worldLimit.x1,
+                y1: info.worldLimit.y1,
+                x2: info.worldLimit.x2,
+                y2: info.worldLimit.y2
+            }
+        });
+        this.componentList.push(avg);
+    }
+
+    createNewBedWithInfo(info) {
+        let bed = new Bed({
+            scene: this.scene,
+            name: info.name,
+            worldX: info.worldX,
+            worldY: info.worldY,
+            worldWidth: info.worldWidth,
+            worldHeight: info.worldHeight,
+            color: info.color,
+            depth: info.depth,
+            ondragend: (pointer, gameObject) => {
+
+            },
+            worldLimit: {
+                x1: info.worldLimit.x1,
+                y1: info.worldLimit.y1,
+                x2: info.worldLimit.x2,
+                y2: info.worldLimit.y2
+            }
+        });
+        this.componentList.push(bed);
+    }
+
+    createNewRobotWithInfo(info) {
+        let robot = new Robot({
+            scene: this.scene,
+            name: info.name,
+            worldX: info.worldX,
+            worldY: info.worldY,
+            worldWidth: info.worldWidth,
+            worldHeight: info.worldHeight,
+            color: info.color,
+            depth: info.depth,
+            ondragend: (pointer, gameObject) => {
+
+            },
+            worldLimit: {
+                x1: info.worldLimit.x1,
+                y1: info.worldLimit.y1,
+                x2: info.worldLimit.x2,
+                y2: info.worldLimit.y2
+            }
+        });
+        this.componentList.push(robot);
+    }
+
+    createNewPlayerWithInfo(info) {
+        if (this.player != null) return;
+        let player = new Player({
+            scene: this.scene,
+            name: info.name,
+            worldX: info.worldX,
+            worldY: info.worldY,
+            worldWidth: info.worldWidth,
+            worldHeight: info.worldHeight,
+            color: info.color,
+            depth: info.depth,
+            ondragend: (pointer, gameObject) => {
+
+            },
+            worldLimit: {
+                x1: info.worldLimit.x1,
+                y1: info.worldLimit.y1,
+                x2: info.worldLimit.x2,
+                y2: info.worldLimit.y2
+            }
+        });
+        this.player = player;
+        this.componentList.push(player);
+    }
+
+    createNewPeople() {
+        let people = new People({
+            scene: this.scene,
+            name: 'people',
+            worldX: Math.floor(Math.random() * (this.worldLimitX - 10)),
+            worldY: Math.floor(Math.random() * (this.worldLimitY - 10)),
+            worldWidth: 2,
+            worldHeight: 2,
+            color: 0x333333,
+            depth: 4
+        });
+        this.componentList.push(people);
+    }
+
     setCurrentComponentEditting(newComponent) {
         if (newComponent == this.currentComponentEditting) return true;
 
@@ -222,6 +358,14 @@ export default class MainGamePlayScene extends Phaser.GameObjects.Container {
         component.setActive(false).setVisible(false);
     }
 
+    deleteAllComponent() {
+        if (this.player != null) this.player = null;
+        this.componentList = this.componentList.filter(function(ele) {
+            ele.setActive(false).setVisible(false);
+            return false;
+        });
+    }
+
     getNewRoom(width, height, oldRoom) {
 
         let room = new Room({
@@ -269,16 +413,23 @@ export default class MainGamePlayScene extends Phaser.GameObjects.Container {
             }
         }
         let isAccept = true;
+        console.log(this.componentList.length);
         for (let i = 0; i < this.componentList.length; i++) {
+            console.log(this.componentList[i].name);
             for (let _iw = 0; _iw < this.componentList[i].worldWidth; _iw++) {
                 for (let _ih = 0; _ih < this.componentList[i].worldHeight; _ih++) {
                     let a = this.componentList[i].getWorldX() + _iw;
                     let b = this.componentList[i].getWorldY() + _ih;
-                    resultMatrix[this.componentList[i].getWorldX() + _iw][this.componentList[i].getWorldY() + _ih] += 1;
+                    resultMatrix[this.componentList[i].getWorldX() +
+                            _iw]
+                        [this.componentList[i].getWorldY() +
+                            _ih
+                        ] += 1;
                     if (resultMatrix[this.componentList[i].getWorldX() + _iw][this.componentList[i].getWorldY() + _ih] > 1) isAccept = false;
                 }
             }
         }
+        console.log(resultMatrix);
         return [resultMatrix, isAccept];
     }
 
@@ -287,5 +438,51 @@ export default class MainGamePlayScene extends Phaser.GameObjects.Container {
         if (_isplaying) {
             this.setCurrentComponentEditting(null);
         }
+    }
+
+    getArrConponentData() {
+        let arr = []
+        for (let index = 0; index < this.componentList.length; index++) {
+            arr.push(this.componentList[index].getMeObject());
+        }
+        return arr;
+    }
+    getArrConponentDataString() {
+        return JSON.stringify(this.getArrConponentData());
+    }
+
+    getDataFromStringJson(strData) {
+        if (!strData || strData == "") return null;
+        return JSON.parse(strData);
+    }
+
+    saveData() {
+        this.writeFileData(this.getArrConponentDataString());
+    }
+
+    loadData() {
+        this.setCurrentComponentEditting(null);
+        this.drawComponentByData(this.getDataFromStringJson(this.readFileData()));
+    }
+
+    drawComponentByData(dataListObj) {
+        this.deleteAllComponent();
+        if (dataListObj == null) return;
+        for (let i = 0; i < dataListObj.length; i++) {
+            let obj = dataListObj[i];
+            if (obj.name == 'avg') this.createNewAVGWithInfo(obj);
+            if (obj.name == 'room') this.createNewRoomWithInfo(obj);
+            if (obj.name == 'bed') this.createNewBedWithInfo(obj);
+            if (obj.name == 'robot') this.createNewRobotWithInfo(obj);
+            if (obj.name == 'player') this.createNewPlayerWithInfo(obj);
+        }
+    }
+
+    writeFileData(data) {
+        this.scene.game.data = data;
+    }
+
+    readFileData() {
+        return this.scene.game.data;
     }
 }

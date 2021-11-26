@@ -22,4 +22,22 @@ export default class People extends ItemBase {
         this.box8 = new Phaser.GameObjects.Rectangle(this.scene, 10, 2, 4, 4, 0xffffff);
         this.add([this.box1, this.box2, this.box3, this.box4, this.box5, this.box6, this.box7, this.box8])
     }
+
+    getMeObject() {
+        return {
+            name: this.name,
+            worldX: this.getWorldX(),
+            worldY: this.getWorldY(),
+            worldWidth: this.worldWidth,
+            worldHeight: this.worldHeight,
+            color: this.color,
+            depth: this.depth,
+            worldLimit: {
+                x1: this.worldLimit.x1,
+                y1: this.worldLimit.y1,
+                x2: this.worldLimit.x2,
+                y2: this.worldLimit.y2
+            }
+        }
+    }
 }

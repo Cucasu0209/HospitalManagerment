@@ -66,4 +66,5 @@ export default class PeacePath extends ItemBase {
             this.add([this.line, this.point1, this.point2, this.point3, this.point4, this.point5, this.point6]);
         }
     }
+
 }
