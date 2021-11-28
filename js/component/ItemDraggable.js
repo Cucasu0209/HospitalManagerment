@@ -36,6 +36,22 @@ export default class ItemDraggable extends ItemBase {
             gameObject.ondragend(pointer, gameObject);
         })
     }
-
+    getMeObject() {
+        return {
+            name: this.name,
+            worldX: this.getWorldX(),
+            worldY: this.getWorldY(),
+            worldWidth: this.worldWidth,
+            worldHeight: this.worldHeight,
+            color: this.color,
+            depth: this.depth,
+            worldLimit: {
+                x1: this.worldLimit.x1,
+                y1: this.worldLimit.y1,
+                x2: this.worldLimit.x2,
+                y2: this.worldLimit.y2
+            }
+        }
+    }
 
 }

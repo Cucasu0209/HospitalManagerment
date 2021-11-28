@@ -17,7 +17,7 @@ export default class Room extends ItemEdittable {
         this.numOfPeople = 0;
         this.maxNumOfPeople = Math.floor((this.worldWidth - 1) / 3) * Math.floor((this.worldHeight - 1) / 3);
 
-
+        this.tag = 'furniture';
     }
 
     addRoomDoors(_numOfDoors) {
@@ -78,8 +78,8 @@ export default class Room extends ItemEdittable {
                     name: 'people',
                     worldX: -this.x / this.scene.baseSquareSize.x + this.getWorldX() + 3 * ((this.numOfPeople) % Math.floor((this.worldWidth - 1) / 3) + 1) - 2,
                     worldY: -this.y / this.scene.baseSquareSize.y + this.getWorldY() + 3 * Math.ceil((this.numOfPeople + 1) / Math.floor((this.worldWidth - 1) / 3)) - 2,
-                    worldWidth: 2,
-                    worldHeight: 2,
+                    worldWidth: 1,
+                    worldHeight: 1,
                     color: 0x333333,
                     depth: 4
                 });
@@ -91,5 +91,23 @@ export default class Room extends ItemEdittable {
         }
     }
 
-
+    getMeObject() {
+        return {
+            name: this.name,
+            worldX: this.getWorldX(),
+            worldY: this.getWorldY(),
+            worldWidth: this.worldWidth,
+            worldHeight: this.worldHeight,
+            color: this.color,
+            depth: this.depth,
+            worldLimit: {
+                x1: this.worldLimit.x1,
+                y1: this.worldLimit.y1,
+                x2: this.worldLimit.x2,
+                y2: this.worldLimit.y2
+            },
+            numberOfPeople: this.numOfPeople,
+            numberOfDoor: this.numOfDoors
+        }
+    }
 }

@@ -41,24 +41,35 @@ export default class MainMenu extends Phaser.GameObjects.Container {
         });
         this.avgBtn = new ButtonBase({
             scene: this.scene,
-            x: this.x + 100,
+            x: this.x + 60,
             y: this.y + 100,
-            width: 150,
+            width: 70,
             height: 30,
-            text: "New AVG",
+            text: "Add AGV",
             onClick: () => {
-                this.scene.mainGamePlayScene.createNewAVG();
+                this.scene.mainGamePlayScene.createNewAGV();
             }
         });
-        this.bedBtn = new ButtonBase({
+        this.avgBtn = new ButtonBase({
+            scene: this.scene,
+            x: this.x + 135,
+            y: this.y + 100,
+            width: 70,
+            height: 30,
+            text: "Del AGV",
+            onClick: () => {
+                this.scene.mainGamePlayScene.deleteNewAGV();
+            }
+        });
+        this.roadBtn = new ButtonBase({
             scene: this.scene,
             x: this.x + 100,
             y: this.y + 150,
             width: 150,
             height: 30,
-            text: "New Bed",
+            text: "New AGV Road",
             onClick: () => {
-                this.scene.mainGamePlayScene.createNewBed();
+                this.scene.mainGamePlayScene.createNewRoad();
             }
         });
         this.robotBtn = new ButtonBase({
@@ -67,35 +78,32 @@ export default class MainMenu extends Phaser.GameObjects.Container {
             y: this.y + 200,
             width: 150,
             height: 30,
-            text: "New Robot",
+            text: "New Furniture",
             onClick: () => {
                 this.scene.mainGamePlayScene.createNewRobot();
             }
         });
 
-        this.playerBtn = new ButtonBase({
-            scene: this.scene,
-            x: this.x + 300,
-            y: this.y + 50,
-            width: 150,
-            height: 30,
-            text: "New Player",
-            onClick: () => {
-                this.scene.mainGamePlayScene.createNewPlayer();
-            }
-        });
+        // this.playerBtn = new ButtonBase({
+        //     scene: this.scene,
+        //     x: this.x + 300,
+        //     y: this.y + 50,
+        //     width: 150,
+        //     height: 30,
+        //     text: "New Player",
+        //     onClick: () => {
+        //         this.scene.mainGamePlayScene.createNewPlayer();
+        //     }
+        // });
         this.peopleBtn = new ButtonBase({
             scene: this.scene,
             x: this.x + 300,
             y: this.y + 100,
             width: 150,
             height: 30,
-            text: "People Setting",
+            text: "Save Data",
             onClick: () => {
-                this.scene.mainGamePlayScene.setCurrentComponentEditting(null);
-                this.editMenu.hideAllEditMenu();
-                this.editMenu.setPeopleEditorActive(true);
-                // this.scene.mainGamePlayScene.createNewPeople();
+                this.scene.mainGamePlayScene.saveData();
             }
         });
         this.loadBtn = new ButtonBase({
@@ -106,7 +114,7 @@ export default class MainMenu extends Phaser.GameObjects.Container {
             height: 30,
             text: "Load Data",
             onClick: () => {
-
+                this.scene.mainGamePlayScene.loadData();
             }
         });
         this.backBtn = new ButtonBase({
@@ -129,6 +137,7 @@ export default class MainMenu extends Phaser.GameObjects.Container {
             text: "Play Game",
             onClick: () => {
                 if (this.scene.mainGamePlayScene.getMapMatrix()[1]) {
+                    console.log(this.scene.mainGamePlayScene.getAGVRoadMatrix());
                     this.scene.playSetting.setVisible(true);
                     this.scene.mainGamePlayScene.setIsPlayingMainGame(true);
                     this.editMenu.hideAllEditMenu();

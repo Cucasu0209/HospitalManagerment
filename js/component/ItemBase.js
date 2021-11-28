@@ -66,4 +66,20 @@ export default class ItemBase extends Phaser.GameObjects.Container {
         return this.worldY;
     }
 
+    getMeObject() {
+        return {
+            name: this.name,
+            worldX: this.getWorldX(),
+            worldY: this.getWorldY(),
+            worldWidth: this.worldWidth,
+            worldHeight: this.worldHeight,
+            color: this.color,
+            depth: this.depth
+        }
+    }
+
+    toStringContainer() {
+        return JSON.stringify(this.getMeObject());
+    }
+
 }
