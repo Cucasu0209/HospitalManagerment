@@ -6,10 +6,12 @@ export default class PeacePath extends ItemBase {
         let { direction } = data;
         this.direction = direction
         this.createDirection();
+
+        this.tag = 'path';
     }
 
     createDirection() {
-        if (this.direction == 'up') {
+        if (this.direction == 'down') {
             this.line = new Phaser.GameObjects.Rectangle(this.scene, 0, 0, 2, 14, 0xffffff);
 
             this.point1 = new Phaser.GameObjects.Rectangle(this.scene, 6, 0, 2, 2, 0xffffff);
@@ -24,7 +26,8 @@ export default class PeacePath extends ItemBase {
 
         }
 
-        if (this.direction == 'down') {
+        if (this.direction == 'up') {
+            console.log("up");
             this.line = new Phaser.GameObjects.Rectangle(this.scene, 0, 0, 2, 14, 0xffffff);
 
             this.point1 = new Phaser.GameObjects.Rectangle(this.scene, 6, 0, 2, 2, 0xffffff);
@@ -53,6 +56,7 @@ export default class PeacePath extends ItemBase {
         }
 
         if (this.direction == 'left') {
+
             this.line = new Phaser.GameObjects.Rectangle(this.scene, 0, 0, 14, 2, 0xffffff);
 
             this.point1 = new Phaser.GameObjects.Rectangle(this.scene, 0, 6, 2, 2, 0xffffff);

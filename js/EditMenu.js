@@ -19,20 +19,20 @@ export default class EditMenu extends Phaser.GameObjects.Container {
     }
 
     create() {
-        this.createRoomEditor();
-        this.setRoomEditorActive(false);
-        this.createAVGEditor();
-        this.setAVGEditorActive(false);
-        this.createBedEditor();
-        this.setBedEditorActive(false);
-        this.createRobotEditor();
-        this.setRobotEditorActive(false);
-        this.createPlayerEditor();
-        this.setPlayerEditorActive(false);
-        this.createPeopleEditor();
-        this.setPeopleEditorActive(false);
-    }
-
+            this.createRoomEditor();
+            this.setRoomEditorActive(false);
+            this.createAVGEditor();
+            this.setAVGEditorActive(false);
+            this.createRoadEditor();
+            this.setRoadEditorActive(false);
+            this.createRobotEditor();
+            this.setRobotEditorActive(false);
+            this.createPlayerEditor();
+            this.setPlayerEditorActive(false);
+            this.createPeopleEditor();
+            this.setPeopleEditorActive(false);
+        }
+        //Room
     createRoomEditor() {
         this.labelEditWidthRoom = new Phaser.GameObjects.Text(this.scene, 40, 60, "Width:");
         this.labelEditWidthRoom.setOrigin(0, 0.5);
@@ -225,58 +225,58 @@ export default class EditMenu extends Phaser.GameObjects.Container {
     }
 
     setRoomEditorActive(isActive, objectEditting) {
-        if (isActive && !this.isRoomEditorActive) {
-            this.componentEditting = objectEditting;
-            this.widthRoom = objectEditting.worldWidth;
-            this.heightRoom = objectEditting.worldHeight;
-            this.peoplesRoom = objectEditting.numOfPeople;
-            this.doorsRoom = objectEditting.numOfDoors;
-            this.labelWidthRoom.text = objectEditting.worldWidth + "";
-            this.labelHeightRoom.text = objectEditting.worldHeight + "";
-            this.labelPeoplesRoom.text = objectEditting.numOfPeople + "";
-            this.labelDoorsRoom.text = objectEditting.numOfDoors + "";
-            this.labelEditWidthRoom.x -= 100000;
-            this.labelEditHeightRoom.x -= 100000;
-            this.labelEditPeoplesRoom.x -= 100000;
-            this.labelEditDoorsRoom.x -= 100000;
-            this.labelWidthRoom.x -= 100000;
-            this.labelHeightRoom.x -= 100000;
-            this.labelPeoplesRoom.x -= 100000;
-            this.labelDoorsRoom.x -= 100000;
-            this.increaseRoomWidthBtn.x -= 100000;
-            this.decreaseRoomWidthBtn.x -= 100000;
-            this.increaseRoomHeightBtn.x -= 100000;
-            this.decreaseRoomHeightBtn.x -= 100000;
-            this.increaseRoomPeoplesBtn.x -= 100000;
-            this.decreaseRoomPeoplesBtn.x -= 100000;
-            this.increaseRoomDoorsBtn.x -= 100000;
-            this.decreaseRoomDoorsBtn.x -= 100000;
-            this.saveRoomBtn.x -= 100000;
-            this.deleteRoomBtn.x -= 100000;
+            if (isActive && !this.isRoomEditorActive) {
+                this.componentEditting = objectEditting;
+                this.widthRoom = objectEditting.worldWidth;
+                this.heightRoom = objectEditting.worldHeight;
+                this.peoplesRoom = objectEditting.numOfPeople;
+                this.doorsRoom = objectEditting.numOfDoors;
+                this.labelWidthRoom.text = objectEditting.worldWidth + "";
+                this.labelHeightRoom.text = objectEditting.worldHeight + "";
+                this.labelPeoplesRoom.text = objectEditting.numOfPeople + "";
+                this.labelDoorsRoom.text = objectEditting.numOfDoors + "";
+                this.labelEditWidthRoom.x -= 100000;
+                this.labelEditHeightRoom.x -= 100000;
+                this.labelEditPeoplesRoom.x -= 100000;
+                this.labelEditDoorsRoom.x -= 100000;
+                this.labelWidthRoom.x -= 100000;
+                this.labelHeightRoom.x -= 100000;
+                this.labelPeoplesRoom.x -= 100000;
+                this.labelDoorsRoom.x -= 100000;
+                this.increaseRoomWidthBtn.x -= 100000;
+                this.decreaseRoomWidthBtn.x -= 100000;
+                this.increaseRoomHeightBtn.x -= 100000;
+                this.decreaseRoomHeightBtn.x -= 100000;
+                this.increaseRoomPeoplesBtn.x -= 100000;
+                this.decreaseRoomPeoplesBtn.x -= 100000;
+                this.increaseRoomDoorsBtn.x -= 100000;
+                this.decreaseRoomDoorsBtn.x -= 100000;
+                this.saveRoomBtn.x -= 100000;
+                this.deleteRoomBtn.x -= 100000;
+            }
+            if (!isActive && this.isRoomEditorActive) {
+                this.labelEditWidthRoom.x += 100000;
+                this.labelEditHeightRoom.x += 100000;
+                this.labelEditPeoplesRoom.x += 100000;
+                this.labelEditDoorsRoom.x += 100000;
+                this.labelWidthRoom.x += 100000;
+                this.labelHeightRoom.x += 100000;
+                this.labelPeoplesRoom.x += 100000;
+                this.labelDoorsRoom.x += 100000;
+                this.increaseRoomWidthBtn.x += 100000;
+                this.decreaseRoomWidthBtn.x += 100000;
+                this.increaseRoomHeightBtn.x += 100000;
+                this.decreaseRoomHeightBtn.x += 100000;
+                this.increaseRoomPeoplesBtn.x += 100000;
+                this.decreaseRoomPeoplesBtn.x += 100000;
+                this.increaseRoomDoorsBtn.x += 100000;
+                this.decreaseRoomDoorsBtn.x += 100000;
+                this.saveRoomBtn.x += 100000;
+                this.deleteRoomBtn.x += 100000;
+            }
+            this.isRoomEditorActive = isActive;
         }
-        if (!isActive && this.isRoomEditorActive) {
-            this.labelEditWidthRoom.x += 100000;
-            this.labelEditHeightRoom.x += 100000;
-            this.labelEditPeoplesRoom.x += 100000;
-            this.labelEditDoorsRoom.x += 100000;
-            this.labelWidthRoom.x += 100000;
-            this.labelHeightRoom.x += 100000;
-            this.labelPeoplesRoom.x += 100000;
-            this.labelDoorsRoom.x += 100000;
-            this.increaseRoomWidthBtn.x += 100000;
-            this.decreaseRoomWidthBtn.x += 100000;
-            this.increaseRoomHeightBtn.x += 100000;
-            this.decreaseRoomHeightBtn.x += 100000;
-            this.increaseRoomPeoplesBtn.x += 100000;
-            this.decreaseRoomPeoplesBtn.x += 100000;
-            this.increaseRoomDoorsBtn.x += 100000;
-            this.decreaseRoomDoorsBtn.x += 100000;
-            this.saveRoomBtn.x += 100000;
-            this.deleteRoomBtn.x += 100000;
-        }
-        this.isRoomEditorActive = isActive;
-    }
-
+        //AGV
     createAVGEditor() {
         this.selfControlAVGBtn = new ButtonBase({
             scene: this.scene,
@@ -376,9 +376,109 @@ export default class EditMenu extends Phaser.GameObjects.Container {
         this.isAVGEditorActive = isActive;
     }
 
-    createBedEditor() {
+    //Road
+    createRoadEditor() {
+        this.labelEditLengthRoad = new Phaser.GameObjects.Text(this.scene, 60, 200, "Length:");
+        this.labelEditLengthRoad.setOrigin(0, 0.5);
+        this.lengthRoad = 100;
+        this.labelLengthRoad = new Phaser.GameObjects.Text(this.scene, 170, 200, "3");
+        this.labelLengthRoad.setOrigin(0, 0.5);
+        this.add([this.labelEditLengthRoad, this.labelLengthRoad]);
 
-        this.saveBedBtn = new ButtonBase({
+        this.roadToRightBtn = new ButtonBase({
+            scene: this.scene,
+            x: this.x + this.width - 100,
+            y: this.y + 100,
+            width: 100,
+            height: 30,
+            text: "Right",
+            onClick: () => {
+                let newLength = this.componentEditting.getLength();
+                this.componentEditting = this.scene.mainGamePlayScene.getNewRoad('right', newLength, this.componentEditting);
+                this.lengthRoad = this.componentEditting.getLength();
+                this.labelLengthRoad.text = this.lengthRoad + "";
+            },
+        });
+        this.roadToLeftBtn = new ButtonBase({
+            scene: this.scene,
+            x: this.x + 100,
+            y: this.y + 100,
+            width: 100,
+            height: 30,
+            text: "Left",
+            onClick: () => {
+                let newLength = this.componentEditting.getLength();
+                this.componentEditting = this.scene.mainGamePlayScene.getNewRoad('left', newLength, this.componentEditting);
+                this.lengthRoad = this.componentEditting.getLength();
+                this.labelLengthRoad.text = this.lengthRoad + "";
+            },
+        });
+        this.roadToUpBtn = new ButtonBase({
+            scene: this.scene,
+            x: this.x + 100,
+            y: this.y + 150,
+            width: 100,
+            height: 30,
+            text: "Up",
+            onClick: () => {
+                let newLength = this.componentEditting.getLength();
+                this.componentEditting = this.scene.mainGamePlayScene.getNewRoad('up', newLength, this.componentEditting);
+                this.lengthRoad = this.componentEditting.getLength();
+                this.labelLengthRoad.text = this.lengthRoad + "";
+            },
+        });
+        this.roadToDownBtn = new ButtonBase({
+            scene: this.scene,
+            x: this.x + this.width - 100,
+            y: this.y + 150,
+            width: 100,
+            height: 30,
+            text: "Down",
+            onClick: () => {
+                let newLength = this.componentEditting.getLength();
+                this.componentEditting = this.scene.mainGamePlayScene.getNewRoad('down', newLength, this.componentEditting);
+                this.lengthRoad = this.componentEditting.getLength();
+                this.labelLengthRoad.text = this.lengthRoad + "";
+            },
+        });
+
+        this.increaseRoadLengthBtn = new ButtonBase({
+            scene: this.scene,
+            x: this.x + 250,
+            y: this.y + 200,
+            width: 20,
+            height: 20,
+            text: "+",
+            onClick: () => {
+                let newLength = this.componentEditting.getLength() + 1;
+                this.componentEditting = this.scene.mainGamePlayScene.getNewRoad(this.componentEditting.direction, newLength, this.componentEditting);
+                this.lengthRoad = this.componentEditting.getLength();
+                this.labelLengthRoad.text = this.lengthRoad + "";
+            }
+        });
+        this.decreaseRoadLengthBtn = new ButtonBase({
+            scene: this.scene,
+            x: this.x + 150,
+            y: this.y + 200,
+            width: 20,
+            height: 20,
+            text: "-",
+            onClick: () => {
+                let newLength = this.componentEditting.getLength() - 1;
+                this.componentEditting = this.scene.mainGamePlayScene.getNewRoad(this.componentEditting.direction, newLength, this.componentEditting);
+                this.lengthRoad = this.componentEditting.getLength();
+                this.labelLengthRoad.text = this.lengthRoad + "";
+                // let newValue = this.componentEditting.numOfDoors - 1;
+                // if (newValue >= 1 && newValue <= 4) {
+                //     this.componentEditting.addRoomDoors(newValue);
+                //     this.doorsRoom = newValue;
+                //     this.labelDoorsRoom.text = newValue + "";
+                // }
+            }
+        });
+
+
+        this.saveRoadBtn = new ButtonBase({
             scene: this.scene,
             x: this.x + this.width - 100,
             y: this.y + this.height - 50,
@@ -389,7 +489,7 @@ export default class EditMenu extends Phaser.GameObjects.Container {
                 this.scene.mainGamePlayScene.setCurrentComponentEditting(null);
             },
         });
-        this.deleteBedBtn = new ButtonBase({
+        this.deleteRoadBtn = new ButtonBase({
             scene: this.scene,
             x: this.x + 100,
             y: this.y + this.height - 50,
@@ -402,25 +502,43 @@ export default class EditMenu extends Phaser.GameObjects.Container {
                 this.componentEditting = null;
             }
         });
-        this.isBedEditorActive = true;
-        this.setBedEditorActive(true);
+        this.isRoadEditorActive = true;
+        this.setRoadEditorActive(true);
     }
 
-    setBedEditorActive(isActive, objectEditting) {
-        if (isActive && !this.isBedEditorActive) {
+    setRoadEditorActive(isActive, objectEditting) {
+        if (isActive && !this.isRoadEditorActive) {
             this.componentEditting = objectEditting;
-            this.saveBedBtn.x -= 100000;
-            this.deleteBedBtn.x -= 100000;
+            this.lengthRoad = objectEditting.getLength();
+            this.labelLengthRoad.text = this.lengthRoad + "";
+            this.labelEditLengthRoad.x -= 100000;
+            this.labelLengthRoad.x -= 100000;
+            this.decreaseRoadLengthBtn.x -= 100000;
+            this.increaseRoadLengthBtn.x -= 100000;
+            this.roadToDownBtn.x -= 100000;
+            this.roadToUpBtn.x -= 100000;
+            this.roadToRightBtn.x -= 100000;
+            this.roadToLeftBtn.x -= 100000;
+            this.saveRoadBtn.x -= 100000;
+            this.deleteRoadBtn.x -= 100000;
         }
-        if (!isActive && this.isBedEditorActive) {
-            this.saveBedBtn.x += 100000;
-            this.deleteBedBtn.x += 100000;
+        if (!isActive && this.isRoadEditorActive) {
+            this.labelEditLengthRoad.x += 100000;
+            this.labelLengthRoad.x += 100000;
+            this.decreaseRoadLengthBtn.x += 100000;
+            this.increaseRoadLengthBtn.x += 100000;
+            this.roadToDownBtn.x += 100000;
+            this.roadToUpBtn.x += 100000;
+            this.roadToRightBtn.x += 100000;
+            this.roadToLeftBtn.x += 100000;
+            this.saveRoadBtn.x += 100000;
+            this.deleteRoadBtn.x += 100000;
         }
-        this.isBedEditorActive = isActive;
+        this.isRoadEditorActive = isActive;
     }
 
 
-
+    //Robot
     createRobotEditor() {
 
         this.saveRobotBtn = new ButtonBase({
@@ -465,7 +583,7 @@ export default class EditMenu extends Phaser.GameObjects.Container {
     }
 
 
-
+    //Player
     createPlayerEditor() {
 
         this.savePlayerBtn = new ButtonBase({
@@ -509,7 +627,7 @@ export default class EditMenu extends Phaser.GameObjects.Container {
         this.isPlayerEditorActive = isActive;
     }
 
-
+    //people
     createPeopleEditor() {
         this.labelEditPeople = new Phaser.GameObjects.Text(this.scene, 50, 60, "Number of people:");
         this.labelEditPeople.setOrigin(0, 0.5);
@@ -584,7 +702,7 @@ export default class EditMenu extends Phaser.GameObjects.Container {
     hideAllEditMenu() {
         this.setRoomEditorActive(false);
         this.setAVGEditorActive(false);
-        this.setBedEditorActive(false);
+        this.setRoadEditorActive(false);
         this.setRobotEditorActive(false);
         this.setPlayerEditorActive(false);
         this.setPeopleEditorActive(false);

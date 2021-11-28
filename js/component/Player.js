@@ -33,7 +33,7 @@ export default class Player extends ItemEdittable {
             this.keyup(e);
         })
 
-
+        this.tag = 'people';
     }
     keydown(e) {
         console.log(e.key);
